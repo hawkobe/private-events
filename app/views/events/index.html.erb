@@ -1,1 +1,7 @@
 <h1>Cool Events!</h1>
+
+<% @events.each do |event| %>
+  <h3><%= event.name.capitalize %>:</h3>
+  <p><%= event.location.capitalize %></p>
+  <p><%= event.date.to_formatted_s(:long) %></p>
+<% end %>

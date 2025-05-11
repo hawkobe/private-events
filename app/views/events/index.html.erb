@@ -1,5 +1,7 @@
 <h1>Cool Events!</h1>
 
+<%= button_to 'Log out', destroy_user_session_path, method: :delete %>
+
 <% @events.each do |event| %>
   <h3><%= event.name.capitalize %>:</h3>
   <p><%= event.location.capitalize %></p>

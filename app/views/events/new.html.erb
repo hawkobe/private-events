@@ -1,0 +1,18 @@
+<h1>Event Details</h1>
+
+<h3>Please fill in the information for your event:</h3>
+<%= form_with model: @event do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+</div>
+<div>
+  <%= f.label :date %>
+  <%= f.date_select :date %>
+</div>
+<%= f.submit %>
+<% end %>

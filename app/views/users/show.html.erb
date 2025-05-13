@@ -5,3 +5,15 @@
   <p> <%= event.location %></p>
   <p> <%= event.date.to_formatted_s(:long) %></p>
 <% end %>
+
+<h4>Upcoming Events <%= @user.username %> is attending:</h4>
+
+<% @user.attended_events.where("date > ?", Time.zone.now).each do |upcoming_event| %>
+  <p><%= upcoming_event.name %></p>
+<% end %>
+
+<h4>Past Events <%= @user.username %> has attended:</h4>
+
+<% @user.attended_events.where("date < ?", Time.zone.now).each do |past_event| %>
+  <p><%= past_event.name %></p>
+<% end %>

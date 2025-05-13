@@ -1,3 +1,12 @@
 <h1>Event: <%= @event.name.capitalize %></h1>
 <p>Location: <%=@event.location.capitalize %></p>
 <p>Time: <%= @event.date.to_formatted_s(:long) %></p>
+
+<h4>Who's Attending:</h4>
+<% @event.attendees.each do |attendee| %>
+  <p><%= attendee.username %></p>
+<% end %>
+
+<h4>Want to attend, too?</h4>
+
+<%= button_to 'Attend this Event', attend_event_path, method: :post %>

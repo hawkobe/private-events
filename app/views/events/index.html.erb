@@ -1,7 +1,15 @@
 <h1>Cool Events!</h1>
 
-<% @events.each do |event| %>
-  <h3><%= event.name.capitalize %>:</h3>
+<h2>Upcoming Events:</h2>
+<% @events.upcoming_events.each do |event| %>
+  <h3><%= link_to event.name.capitalize, event_path(event) %>:</h3>
+  <p><%= event.location.capitalize %></p>
+  <p><%= event.date.to_formatted_s(:long) %></p>
+<% end %>
+
+<h2>Past Events:</h2>
+<% @events.past_events.each do |event| %>
+  <h3><%= link_to event.name.capitalize, event_path(event) %>:</h3>
   <p><%= event.location.capitalize %></p>
   <p><%= event.date.to_formatted_s(:long) %></p>
 <% end %>

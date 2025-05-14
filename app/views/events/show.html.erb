@@ -7,6 +7,9 @@
   <p><%= attendee.username %></p>
 <% end %>
 
-<h4>Want to attend, too?</h4>
 
-<%= button_to 'Attend this Event', attend_event_path, method: :post %>
+<% if Event.upcoming_events.include?(@event) %>
+  <h4>Want to attend, too?</h4>
+
+  <%= button_to 'Attend this Event', attend_event_path, method: :post %>
+<% end %>

@@ -8,3 +8,14 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ .nav {
+  display: flex;
+  gap: 10px
+}
+
+.button_to {
+  display: flex;
+  align-items: center;
+}
+

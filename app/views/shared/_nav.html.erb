@@ -1,4 +1,12 @@
 <div class="nav">
-  <%= button_to "Home", events_path, method: :get %>
-  <%= button_to 'Log out', destroy_user_session_path, method: :delete %>
+  <%= button_to 'Home', events_path, method: :get %>
+
+  <% if user_signed_in? %>
+    <%= button_to 'Log out', destroy_user_session_path, method: :delete %>
+  <% else %>
+    <p>Want to attend events?</p>
+    <%= button_to 'Sign up', new_user_registration_path %>
+    <p>Or</p>
+    <%= button_to 'Sign in', new_user_session_path %>
+  <% end %>
 </div>

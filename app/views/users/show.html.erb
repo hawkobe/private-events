@@ -1,4 +1,4 @@
-<h1><%= @user.username.capitalize %>'s Events</h1>
+<h1> Events <%= @user.username.capitalize %> is hosting:</h1>
 
 <% @user.created_events.each do |event| %>
   <h2><%= event.name %></h2>

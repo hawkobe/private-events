@@ -1,14 +1,12 @@
 class EventsController < ApplicationController
-  include EventsHelper
-
   before_action :authenticate_user!, except: [ :index, :show ]
-  before_action :can_modify?, only: [ :edit ]
+  before_action :can_modify?, only: [ :edit, :destroy ]
+  before_action :find_params, except: [ :index, :new, :create ]
   def index
     @events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   def new
@@ -16,7 +14,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def create
@@ -29,8 +26,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
-
     if @event.update(event_params)
       redirect_to @event
     else
@@ -39,14 +34,12 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
 
     redirect_to root_path, status: :see_other
   end
 
   def attend
-    @event = Event.find(params[:id])
     if @event.attendees.include?(current_user)
       redirect_to @event, notice: "You are already on the list"
     else
@@ -66,5 +59,9 @@ class EventsController < ApplicationController
     unless current_user == @event.creator
       redirect_to root_path, alert: "You are not authorized to edit this"
     end
+  end
+
+  def find_params
+    @event = Event.find(params[:id])
   end
 end

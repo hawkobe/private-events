@@ -2,6 +2,7 @@
   <%= button_to 'Home', events_path, method: :get %>
 
   <% if user_signed_in? %>
+    <%= button_to 'My Profile', user_path(current_user.id), method: :get %>
     <%= button_to 'Create Event', new_event_path, method: :get %>
     <%= button_to 'Log out', destroy_user_session_path, method: :delete %>
   <% else %>

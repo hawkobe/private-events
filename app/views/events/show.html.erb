@@ -13,3 +13,5 @@
 
   <%= button_to 'Attend this Event', attend_event_path, method: :post %>
 <% end %>
+
+<%= render 'user_actions', event: @event %>

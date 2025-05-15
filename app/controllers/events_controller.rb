@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
+      @event.attendees << current_user
       redirect_to @event, notice: "Post was successfully created"
     else
       render "new", status: :unprocessable_entity

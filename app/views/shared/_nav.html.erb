@@ -5,7 +5,7 @@
     <%= button_to 'Log out', destroy_user_session_path, method: :delete %>
   <% else %>
     <p>Want to attend events?</p>
-    <%= button_to 'Sign up', new_user_registration_path %>
+    <%= button_to 'Sign up', new_user_registration_path, method: :get %>
     <p>Or</p>
     <%= button_to 'Sign in', new_user_session_path %>
   <% end %>

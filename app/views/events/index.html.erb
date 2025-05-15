@@ -1,10 +1,11 @@
 <h1>Cool Events!</h1>
 
 <h2>Upcoming Events:</h2>
-<% @events.upcoming_events.each do |event| %>
+<% @events.upcoming_events.includes(:creator).each do |event| %>
   <h3><%= link_to event.name.capitalize, event_path(event) %>:</h3>
   <p><%= event.location.capitalize %></p>
   <p><%= event.date.to_formatted_s(:long) %></p>
+  <p>Hosted by: <%= link_to event.creator.username, user_path(event.creator) %> </p>
 <% end %>
 
 <h2>Past Events:</h2>

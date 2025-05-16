@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show ]
   resources :events do
     post "attend", on: :member
+    delete "unattend", on: :member
   end
 
 

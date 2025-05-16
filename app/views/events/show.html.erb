@@ -12,6 +12,10 @@
   <h4>Want to attend, too?</h4>
 
   <%= button_to 'Attend this Event', attend_event_path, method: :post %>
+  <% if is_attending_guest?(@event) %>
+    <%= button_to 'Unattend this Event', unattend_event_path, method: :delete %>
+  <% end %>
 <% end %>
+
 
 <%= render 'user_actions', event: @event %>

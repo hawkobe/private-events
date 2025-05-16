@@ -49,6 +49,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def unattend
+    if @event.attendees.include?(current_user)
+      @event.attendees.destroy(current_user)
+      redirect_to @event, notice: "You are no longer attending this event"
+    else
+      render "show", notice: "You don't have the permission to unattend this event"
+    end
+  end
+
   private
   def event_params
     params.expect(event: [ :name, :location, :date ])

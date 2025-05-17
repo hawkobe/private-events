@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :can_modify?, only: [ :edit, :destroy ]
   before_action :find_params, except: [ :index, :new, :create ]
+  before_action :user_invited?, only: [ :show ]
   def index
     @events = Event.all
   end
@@ -20,6 +21,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
     if @event.save
       @event.attendees << current_user
+      @event.invited_guests << current_user
       redirect_to @event, notice: "Post was successfully created"
     else
       render "new", status: :unprocessable_entity
@@ -73,5 +75,11 @@ class EventsController < ApplicationController
 
   def find_params
     @event = Event.find(params[:id])
+  end
+
+  def user_invited?
+    unless @event.invited_guests.include?(current_user)
+      redirect_to root_path, alert: "Only invited guests can view this event"
+    end
   end
 end

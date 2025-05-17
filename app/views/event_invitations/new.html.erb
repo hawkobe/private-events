@@ -1,0 +1,5 @@
+<%= form_with model: @invitation, url: event_event_invitations_path do |form|%>
+  <%= form.hidden_field :invited_event_id, value: params[:event_id] %>
+  <%= form.collection_select :guest_invited_id, User.all, :id, :username%>
+  <%= form.submit %>
+<% end %>

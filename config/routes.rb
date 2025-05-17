@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :events do
     post "attend", on: :member
     delete "unattend", on: :member
+    resources :event_invitations, only: [ :new, :create ]
   end
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,4 +1,6 @@
 class EventInvitationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :user_is_creator?
   def new
     @event = Event.find(params[:event_id])
     @invitation = EventInvitation.new
@@ -25,5 +27,13 @@ class EventInvitationsController < ApplicationController
 
   def invite_params
     params.expect(event_invitation: [ :guest_invited_id, :invited_event_id ])
+  end
+
+  def user_is_creator?
+    @event = Event.find(params[:event_id])
+
+    unless current_user.id == @event.creator_id
+      redirect_to root_path, notice: "You aren't authorized to access this"
+    end
   end
 end

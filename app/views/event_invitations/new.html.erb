@@ -1,5 +1,10 @@
+<h1>Invitation to <%=@event.name.capitalize%></h1>
+
 <%= form_with model: @invitation, url: event_event_invitations_path do |form|%>
   <%= form.hidden_field :invited_event_id, value: params[:event_id] %>
-  <%= form.collection_select :guest_invited_id, User.all, :id, :username%>
+  <%= form.label :guest_invited_id, "Please Select a Guest to invite: "%>
+  <%= form.collection_select :guest_invited_id, User.all_except_user(current_user) , :id, :username, prompt: true%><br>
   <%= form.submit %>
 <% end %>
+
+<%= button_to "Back to Event", event_path(@event), method: :get %>

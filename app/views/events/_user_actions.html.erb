@@ -2,4 +2,5 @@
   <p>Or, you can:</p>
   <%= button_to "Delete this event", event, method: :delete %>
   <%= button_to "Edit this event", edit_event_path, method: :get %>
+  <%= button_to "Invite Guests", new_event_event_invitation_path(@event), method: :get %>
 <% end %>

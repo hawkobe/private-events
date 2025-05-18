@@ -6,11 +6,17 @@ class EventInvitationsController < ApplicationController
 
   def create
     @invitation = EventInvitation.new(invite_params)
+    @event = Event.find(params[:event_id])
+    @user = User.find(@invitation.guest_invited_id)
 
-    if @invitation.save
-      redirect_to root_path, notice: "Invitation sent!"
+    if @invitation.valid?
+      if @event.invited_guests.include?(@user)
+        redirect_to @event, notice: "This guest has already been invited!"
+      else
+        @invitation.save
+        redirect_to @event, notice: "Invitation sent!"
+      end
     else
-      debugger
       render "new", alert: "Failed to send"
     end
   end

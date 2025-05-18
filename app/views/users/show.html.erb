@@ -4,7 +4,9 @@
   <h2><%= link_to event.name, event %></h2>
   <p> <%= event.location %></p>
   <p> <%= event.date.to_formatted_s(:long) %></p>
+  <%= button_to "Invite Guests to this Event", new_event_event_invitation_path(event), method: :get %>
 <% end %>
+
 
 <h4>Upcoming Events <%= @user.username %> is attending:</h4>
 
@@ -16,4 +18,5 @@
 
 <% @user.attended_events.where("date < ?", Time.zone.now).each do |past_event| %>
   <p><%= past_event.name %></p>
+  
 <% end %>
